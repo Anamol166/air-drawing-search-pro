@@ -132,9 +132,6 @@ air-drawing-search-pro/
 
 ## Troubleshooting
 
-### Camera not working?
-- Change `cv2.VideoCapture(1)` to `cv2.VideoCapture(0)` in main.py
-
 ### Models not loading?
 - Make sure all `.h5` files are in the same folder as main.py
 
@@ -147,16 +144,6 @@ air-drawing-search-pro/
 - Use the correct mode (A/N/D)
 - Try drawing slower
 
-## Requirements File
-
-All Python libraries needed:
-```
-opencv-python>=4.5.0
-numpy>=1.19.0
-tensorflow>=2.8.0
-mediapipe>=0.8.0
-pyspellchecker>=0.6.0
-```
 
 ## Future Improvements
 
