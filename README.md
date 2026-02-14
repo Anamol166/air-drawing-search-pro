@@ -35,11 +35,7 @@ cd air-drawing-search-pro
 
 ### Step 3: Install Required Libraries
 ```bash
-pip install opencv-python
-pip install numpy
-pip install tensorflow
-pip install mediapipe
-pip install pyspellchecker
+pip install -r requirements.txt
 ```
 
 ### Step 4: Add Your AI Models
