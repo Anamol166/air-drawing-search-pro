@@ -29,7 +29,7 @@ Download Python from [python.org](https://www.python.org/downloads/)
 
 ### Step 2: Download This Project
 ```bash
-git clone https://github.com/anamol166/air-drawing-search-pro.git
+git clone https://github.com/Anamol166/air-drawing-search-pro.git
 cd air-drawing-search-pro
 ```
 
