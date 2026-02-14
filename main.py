@@ -29,7 +29,7 @@ class AirDrawingApp:
         self.is_fullscreen = False
 
     def run(self):
-        cap = cv2.VideoCapture(1)
+        cap = cv2.VideoCapture(0)
         cap.set(3, self.W)
         cap.set(4, self.H)
         win_name = "Air Drawing Search Pro"
