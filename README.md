@@ -165,7 +165,6 @@ pyspellchecker>=0.6.0
 ## Future Improvements
 
 - [ ] Add more drawing categories
-- [ ] Support multiple hands
 - [ ] Save drawings as images
 - [ ] Add voice commands
 - [ ] Mobile app version
