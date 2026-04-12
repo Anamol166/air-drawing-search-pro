@@ -45,7 +45,6 @@ You need these model files in the same folder:
 - `drawing.h5` - For recognizing drawings
 - `class.txt` - List of drawing categories
 
-**Note:** You need to train these models or get them separately (not included in this repo).
 
 ## How to Run
 
