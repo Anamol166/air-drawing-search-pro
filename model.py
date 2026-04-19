@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 from tensorflow.keras.models import load_model # type: ignore
 from spellchecker import SpellChecker
 
@@ -10,6 +11,11 @@ class RecognitionEngine:
         self.num_labels = {i: str(i) for i in range(10)}
         
         try:
+            alpha_path = os.path.abspath(alpha_path)
+            num_path = os.path.abspath(num_path)
+            draw_path = os.path.abspath(draw_path)
+            class_path = os.path.abspath(class_path)
+            
             self.alpha_model = load_model(alpha_path)
             self.num_model = load_model(num_path)
             self.draw_model = load_model(draw_path)

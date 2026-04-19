@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import webbrowser
+import os
+import sys
 from hand import HandTracker
 from model import RecognitionEngine
 
@@ -10,8 +12,18 @@ class AirDrawingApp:
         self.W, self.H = 1280, 720
         self.tracker = HandTracker()
         
+        if getattr(sys, 'frozen', False):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.dirname(os.path.abspath(__file__))
+        
         #ai models for recognition
-        self.engine = RecognitionEngine("bModel.h5", "bestmodel.h5", "drawing.h5", "class.txt")
+        self.engine = RecognitionEngine(
+            os.path.join(base_path, "bModel.h5"),
+            os.path.join(base_path, "bestmodel.h5"),
+            os.path.join(base_path, "drawing.h5"),
+            os.path.join(base_path, "class.txt")
+        )
         
         #drawing canvas 
         self.canvas = np.zeros((self.H, self.W, 3), np.uint8)
