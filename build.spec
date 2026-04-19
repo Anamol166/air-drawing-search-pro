@@ -1,4 +1,4 @@
-# build.spec
+
 
 block_cipher = None
 
@@ -11,7 +11,6 @@ a = Analysis(
         ('bestmodel.h5', '.'),
         ('drawing.h5', '.'),
         ('class.txt', '.'),
-        ('logo.jpg', '.'),
     ],
     hiddenimports=[],
     hookspath=[],
@@ -26,6 +25,7 @@ exe = EXE(
     a.scripts,
     [],
     name='AirDrawingApp',
+    icon='logo.ico',     
     console=False
 )
 
