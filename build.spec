@@ -3,9 +3,6 @@ import os
 
 block_cipher = None
 
-# Get the directory where build.spec is located
-spec_dir = os.path.dirname(os.path.realpath(__file__))
-
 hiddenimports = [
     'tensorflow',
     'tensorflow.keras',
@@ -20,18 +17,16 @@ hiddenimports = [
 ]
 
 datas = [
-    (os.path.join(spec_dir, 'bModel.h5'), '.'),
-    (os.path.join(spec_dir, 'bestmodel.h5'), '.'),
-    (os.path.join(spec_dir, 'drawing.h5'), '.'),
-    (os.path.join(spec_dir, 'class.txt'), '.'),
+    ('bModel.h5', '.'),
+    ('bestmodel.h5', '.'),
+    ('drawing.h5', '.'),
+    ('class.txt', '.'),
 ]
 
-# Add icon only if it exists
-icon_path = os.path.join(spec_dir, 'logo.ico')
-icon_param = icon_path if os.path.exists(icon_path) else None
+icon_param = 'logo.ico' if os.path.exists('logo.ico') else None
 
 a = Analysis(
-    [os.path.join(spec_dir, 'main.py')],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=datas,
