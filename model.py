@@ -1,6 +1,11 @@
 import cv2
 import numpy as np
 import os
+import warnings
+warnings.filterwarnings('ignore')
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 from tensorflow.keras.models import load_model # type: ignore
 from spellchecker import SpellChecker
 
@@ -16,14 +21,22 @@ class RecognitionEngine:
             draw_path = os.path.abspath(draw_path)
             class_path = os.path.abspath(class_path)
             
+            print(f"Loading models from: {alpha_path}")
+            
+            # Check if files exist
+            for path, name in [(alpha_path, 'alpha'), (num_path, 'num'), (draw_path, 'draw'), (class_path, 'class')]:
+                if not os.path.exists(path):
+                    print(f"Warning: {name} file not found at {path}")
+            
             self.alpha_model = load_model(alpha_path)
             self.num_model = load_model(num_path)
             self.draw_model = load_model(draw_path)
             with open(class_path, 'r') as f:
                 self.draw_labels = [line.strip() for line in f.readlines()]
-            print("All AI Models Loaded")
+            print("All AI Models Loaded Successfully")
         except Exception as e:
             print(f"Model Error: {e}")
+            raise
 
     def predict_drawing(self, canvas_th):
         cnts, _ = cv2.findContours(canvas_th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)

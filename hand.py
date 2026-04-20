@@ -1,17 +1,36 @@
 import cv2
 import mediapipe as mp
+import os
+import sys
+
+# Suppress MediaPipe warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 class HandTracker:
     def __init__(self, max_hands=1, detection_confidence=0.8, tracking_confidence=0.8):
-        self.mp_hands = mp.solutions.hands
-        self.hands = self.mp_hands.Hands(
-            static_image_mode=False,
-            max_num_hands=max_hands,
-            min_detection_confidence=detection_confidence,
-            min_tracking_confidence=tracking_confidence
-        )
-        self.mp_draw = mp.solutions.drawing_utils
-        self.results = None
+        try:
+            self.mp_hands = mp.solutions.hands
+            self.hands = self.mp_hands.Hands(
+                static_image_mode=False,
+                max_num_hands=max_hands,
+                min_detection_confidence=detection_confidence,
+                min_tracking_confidence=tracking_confidence
+            )
+            self.mp_draw = mp.solutions.drawing_utils
+            self.results = None
+        except Exception as e:
+            print(f"MediaPipe initialization error: {e}")
+            # Retry with GPU disabled
+            os.environ['MEDIAPIPE_DISABLE_GPU'] = '1'
+            self.mp_hands = mp.solutions.hands
+            self.hands = self.mp_hands.Hands(
+                static_image_mode=False,
+                max_num_hands=max_hands,
+                min_detection_confidence=detection_confidence,
+                min_tracking_confidence=tracking_confidence
+            )
+            self.mp_draw = mp.solutions.drawing_utils
+            self.results = None
         
     def find_hands(self, frame, draw=True):
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

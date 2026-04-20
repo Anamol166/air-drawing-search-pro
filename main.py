@@ -3,6 +3,10 @@ import numpy as np
 import webbrowser
 import os
 import sys
+
+if sys.platform == 'win32':
+    os.environ['MEDIAPIPE_DISABLE_GPU'] = '1'
+
 from hand import HandTracker
 from model import RecognitionEngine
 
@@ -10,12 +14,19 @@ class AirDrawingApp:
     def __init__(self):
         #window dimensions
         self.W, self.H = 1280, 720
-        self.tracker = HandTracker()
-        
         if getattr(sys, 'frozen', False):
             base_path = sys._MEIPASS
         else:
             base_path = os.path.dirname(os.path.abspath(__file__))
+        
+        print(f"Base path: {base_path}")
+        
+        try:
+            self.tracker = HandTracker()
+        except Exception as e:
+            print(f"Warning: HandTracker initialization issue: {e}")
+            print("Attempting to reinitialize...")
+            self.tracker = HandTracker()
         
         #ai models for recognition
         self.engine = RecognitionEngine(
