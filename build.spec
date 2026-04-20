@@ -7,6 +7,7 @@ hiddenimports = [
     'tensorflow',
     'tensorflow.keras',
     'tensorflow.keras.models',
+    'tensorflow.python.keras.engine',
     'mediapipe',
     'mediapipe.python',
     'mediapipe.python.solutions',
@@ -33,7 +34,7 @@ a = Analysis(
     hiddenimports=hiddenimports,
     hookspath=[],
     runtime_hooks=[],
-    excludes=[],
+    excludes=['matplotlib', 'pandas', 'scipy', 'jupyter'],
 )
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
@@ -46,14 +47,17 @@ exe = EXE(
     a.datas,
     [],
     name='AirDrawingApp',
-    icon=icon_param,
-    console=False,
-    upx=False,
-    runtime_tmpdir=None,
+    debug=False,
     bootloader_ignore_signals=False,
     strip=False,
+    upx=True,
     upx_exclude=[],
+    runtime_tmpdir=None,
+    console=False,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
-    entitlements_file=None
+    entitlements_file=None,
+    icon=icon_param
 )
