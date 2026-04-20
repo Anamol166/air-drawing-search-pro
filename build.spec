@@ -3,11 +3,8 @@ import os
 
 block_cipher = None
 
-# Get absolute path to script directory
-if getattr(sys, 'frozen', False):
-    spec_dir = sys._MEIPASS
-else:
-    spec_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the directory where build.spec is located
+spec_dir = os.path.dirname(os.path.realpath(__file__))
 
 hiddenimports = [
     'tensorflow',
@@ -29,7 +26,7 @@ datas = [
     (os.path.join(spec_dir, 'class.txt'), '.'),
 ]
 
-# Add icon only if it exists - use absolute path
+# Add icon only if it exists
 icon_path = os.path.join(spec_dir, 'logo.ico')
 icon_param = icon_path if os.path.exists(icon_path) else None
 
