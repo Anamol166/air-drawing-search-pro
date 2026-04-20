@@ -12,9 +12,13 @@ hiddenimports = [
     'mediapipe.python',
     'mediapipe.python.solutions',
     'mediapipe.python.solutions.hands',
+    'mediapipe.python.solutions.drawing_utils',
+    'mediapipe.python.solutions.drawing_styles',
     'cv2',
     'numpy',
-    'spellchecker'
+    'spellchecker',
+    'matplotlib',
+    'matplotlib.backends'
 ]
 
 datas = [
@@ -34,7 +38,7 @@ a = Analysis(
     hiddenimports=hiddenimports,
     hookspath=[],
     runtime_hooks=[],
-    excludes=['matplotlib', 'pandas', 'scipy', 'jupyter'],
+    excludes=['pandas', 'scipy', 'jupyter'],
 )
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
