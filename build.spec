@@ -1,11 +1,13 @@
 import sys
 import os
-from PyInstaller.utils.hooks import collect_submodules
 
 block_cipher = None
 
 # Get absolute path to script directory
-spec_dir = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, 'frozen', False):
+    spec_dir = sys._MEIPASS
+else:
+    spec_dir = os.path.dirname(os.path.abspath(__file__))
 
 hiddenimports = [
     'tensorflow',
